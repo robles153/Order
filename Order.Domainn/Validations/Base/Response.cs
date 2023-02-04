@@ -14,12 +14,17 @@ namespace Order.Domain.Validations.Base
             Reports = reports;
         }
 
-        public Response(Report report) : this(new List<Report>() { report})
+        public Response(Report report) : this(new List<Report>() { report })
         {
 
         }
 
         public List<Report> Reports { get; }
+
+        public static Response<T> Ok<T>(T data) => new Response<T>(data);
+        public static Response Ok() => new Response();
+        public static Response Unprocessable(List<Report> reports) => new Response(reports);
+        public static Response Unprocessable(Report report) => new Response(report);
     }
 
     public class Response<T> : Response
